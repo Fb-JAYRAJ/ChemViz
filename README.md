@@ -118,4 +118,11 @@ python main.py
 
 **Auth:** Basic Auth
 
+### 🔑 Demo Credentials
+
+To make testing easier, a demo account is included:
+
+**Username:** demo_user  
+**Password:** demo1234
+
 # 👤Developed by: ***Jayraj Sawant***
