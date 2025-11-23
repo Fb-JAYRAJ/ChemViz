@@ -17,7 +17,7 @@ import { Pie, Bar } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://chemviz-backend.onrender.com";
 
 function App() {
   const [username, setUsername] = useState("");
