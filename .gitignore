@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+env/
+
+# Django
+db.sqlite3
+media/
+
+# Node
+chemviz-web/node_modules/
+chemviz-web/build/
+
+# OS / IDE
+.DS_Store
+*.log
+
+# Others
+.env
