@@ -17,7 +17,7 @@ import { Pie, Bar } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
-const API_BASE = "https://chemviz-1.onrender.com";
+const API_BASE = "http://127.0.0.1:8000";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -98,19 +98,27 @@ function App() {
     }
   };
 
-  // Chart data
+  // Chart data: PIE
   const pieData = currentDataset
     ? {
         labels: Object.keys(currentDataset.type_distribution || {}),
         datasets: [
           {
             data: Object.values(currentDataset.type_distribution || {}),
-            backgroundColor: ["#60A5FA", "#34D399", "#F472B6", "#FBBF24", "#A78BFA", "#F87171"],
+            backgroundColor: [
+              "#60A5FA",
+              "#34D399",
+              "#F472B6",
+              "#FBBF24",
+              "#A78BFA",
+              "#F87171",
+            ],
           },
         ],
       }
     : null;
 
+  // Chart data: BAR
   const barData = currentDataset
     ? {
         labels: ["Flowrate", "Pressure", "Temperature"],
@@ -123,11 +131,34 @@ function App() {
               currentDataset.avg_temperature,
             ],
             backgroundColor: ["#3B82F6", "#EF4444", "#10B981"],
+            borderColor: ["#3B82F6", "#EF4444", "#10B981"],
+            borderWidth: 1,
             borderRadius: 6,
           },
         ],
       }
     : null;
+
+  // Chart options to remove empty bottom space
+  const barOptions = {
+    maintainAspectRatio: false,
+    layout: { padding: { bottom: 0 } },
+    plugins: {
+      legend: {
+        labels: { color: "white" },
+      },
+    },
+    scales: {
+      x: {
+        ticks: { color: "white" },
+        grid: { display: false },
+      },
+      y: {
+        ticks: { color: "white" },
+        grid: { color: "rgba(255,255,255,0.1)" },
+      },
+    },
+  };
 
   return (
     <div className="app-wrap">
@@ -217,7 +248,7 @@ function App() {
 
           <div className="card chart-full">
             <h3>Average Parameters</h3>
-            {barData ? <Bar data={barData} /> : <p>No data</p>}
+            {barData ? <Bar data={barData} options={barOptions} /> : <p>No data</p>}
           </div>
         </div>
 

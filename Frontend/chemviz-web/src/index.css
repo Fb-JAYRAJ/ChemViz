@@ -53,6 +53,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
+  align-items: stretch;
 }
 
 /* Inputs */
@@ -121,11 +122,11 @@ label {
 
 /* Bar chart full width */
 .chart-full {
-  width: 100% !important;
-  height: 420px !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 350px !important;
+}
+
+.chart-full canvas {
+  height: 320px !important;
 }
 
 .chart-full canvas {

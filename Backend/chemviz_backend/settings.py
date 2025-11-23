@@ -6,6 +6,7 @@ including installed apps, middleware, database setup, and API behavior.
 """
 
 from pathlib import Path
+import os
 
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,7 +63,6 @@ MIDDLEWARE = [
 # -------------------------------------------------------------------
 # CORS
 # -------------------------------------------------------------------
-# Allow all origins for local development usage
 CORS_ALLOW_ALL_ORIGINS = True
 
 
@@ -70,13 +70,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 # REST FRAMEWORK CONFIGURATION
 # -------------------------------------------------------------------
 REST_FRAMEWORK = {
-    # Basic + session authentication for API usage
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
 
-    # Require user authentication for all API routes
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
@@ -86,7 +84,7 @@ REST_FRAMEWORK = {
 # Main URL configuration
 ROOT_URLCONF = "chemviz_backend.urls"
 
-# Template configuration (not heavily used in this project)
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -102,12 +100,12 @@ TEMPLATES = [
     },
 ]
 
-# WSGI entry point for production servers
+
 WSGI_APPLICATION = "chemviz_backend.wsgi.application"
 
 
 # -------------------------------------------------------------------
-# DATABASE CONFIG (SQLite for simple local development)
+# DATABASE CONFIG (SQLite)
 # -------------------------------------------------------------------
 DATABASES = {
     "default": {
@@ -143,18 +141,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 MEDIA_URL = "/media/"
-# Uploaded CSV files are stored inside /media/uploads/
 MEDIA_ROOT = BASE_DIR / "media"
 
 
-# Default primary key type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-import os
-from django.contrib.auth.models import User
-
-if not User.objects.filter(username="demo_user").exists():
-    try:
-        User.objects.create_user("demo_user", password="demo1234")
-    except:
-        pass
